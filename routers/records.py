@@ -91,7 +91,7 @@ def update_record(
     if not record:
         raise HTTPException(status_code=404, detail="Record not found")
 
-    updates = data.dict(exclude_unset=True)
+    updates = data.model_dump(exclude_unset=True)
     for field, value in updates.items():
         setattr(record, field, value)
     record.updated_at = datetime.utcnow()
